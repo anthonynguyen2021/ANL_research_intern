@@ -5,9 +5,8 @@ import numpy as np
 # Define class and helper functions
 class zerothOrderComposite:
     
-    # Initialize dimension p, n, input vector x, and matrix A
     def __init__(self, p, n, x):
-
+        '''Initialize dimension p, n, input vector x, and matrix A'''
         self.p = p
         self.n = n
         self.x = x
@@ -15,18 +14,17 @@ class zerothOrderComposite:
         self.A = np.random.randn(self.p, self.n)
         # b = A * x
         self.b = self.A @ self.x 
-    
-    # Compute (A * x - b) ^ T * A
-    def helperNormalEquation(self,v):
-        return (self.A @ v - self.b).T @ self.A
-    
-    # Compute || (A * x - b) ^ T * A ||_2 ^ 2
-    def helperNormalEquationNorm(self, v):
-        return np.linalg.norm(self.helperNormalEquation(v), 2) ** 2
-    
-    # Compute v * v ^ T
-    def outerProduct(self, v):
 
+    def helperNormalEquation(self, v):
+        '''Compute (A * x - b) ^ T * A'''
+        return (self.A @ v - self.b).T @ self.A
+
+    def helperNormalEquationNorm(self, v):
+        '''Compute || (A * x - b) ^ T * A ||_2 ^ 2'''
+        return np.linalg.norm(self.helperNormalEquation(v), 2) ** 2
+
+    def outerProduct(self, v):
+        '''Compute v * v ^ T'''
         length = len(v)
         output = np.zeros((length, length))
 
@@ -34,23 +32,21 @@ class zerothOrderComposite:
             output[:, i] = v[i] * v
 
         return output
-    
-    # Compute (A * x - b) ^ T * A[u * u ^ T - I]
-    def helperZerothApproximation(self, v):
 
+    def helperZerothApproximation(self, v):
+        '''Compute (A * x - b) ^ T * A[u * u ^ T - I]'''
         u = np.random.randn(self.n)
         B = self.outerProduct(u)
         output = self.helperNormalEquation(v) * (B - np.eye(self.n))
 
         return output 
-    
-    # Compute || (A * x - b) ^ T A[u * u ^ T - I] || ^ 2
-    def helperZerothApproxNorm(self, v):
-        return np.linalg.norm(self.helperZerothApproximation(v), 2) ** 2
-    
-    # Compute E_u || (A * x - b) ^ T A[u * u ^ T - I] ||_2 ^ 2 via sample average
-    def helperExpectation(self, v, N):
 
+    def helperZerothApproxNorm(self, v):
+        '''Compute || (A * x - b) ^ T A[u * u ^ T - I] || ^ 2'''
+        return np.linalg.norm(self.helperZerothApproximation(v), 2) ** 2
+
+    def helperExpectation(self, v, N):
+        '''Compute E_u || (A * x - b) ^ T A[u * u ^ T - I] ||_2 ^ 2 via sample average'''
         sumTotal = 0
 
         for i in range(N):
@@ -87,7 +83,7 @@ if __name__ == '__main__':
     # To approximate E_u || (A[inVector]-b)^TA[uu^T - I] ||^2 using sample average of numIteration size
     numIteration = 10 ** 3
 
-    # Compute E_u || (A[inVector]-b)^TA[uu^T - I] ||^2 and 4(n+4.5)|| (A[inVector]-b)^TA ||^2
+    # Compute E_u || (A[inVector] - b) ^ T A[u * u ^ T - I] || ^ 2 and 4 * (n + 4.5)|| (A[inVector] - b) ^ T * A || ^ 2
     expectedNormSquared = zerothOrder.helperExpectation(inVector, numIteration)
     normSquared = 4 * (zerothOrder.n + 4.5) * zerothOrder.helperNormalEquationNorm(inVector)
 

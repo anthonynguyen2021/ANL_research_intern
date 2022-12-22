@@ -824,7 +824,7 @@ if found:
 found = True
 if found:
     lamda = 10 ** 1
-    print(f'\nRunning the Ridge Regression Problem on Scheme 1,2,3 using lambda = {lamda}\n')
+    print(f'\nRunning the Ridge Regression Problem on Scheme 1, 2, 3 using lambda = {lamda}\n')
     #sim7(True, False, lamda)
     #sim8(True, False, lamda)
     sim9(True, False, lamda)
