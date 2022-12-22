@@ -1,0 +1,231 @@
+\usepackage{booktabs}
+\usepackage{graphicx} % for graphicspath
+\usepackage{xcolor,color}
+\PassOptionsToPackage{hyphens}{url}\usepackage[
+    breaklinks=true,
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+    ]{hyperref}
+\usepackage{doi}
+\usepackage[numbers,compress,sort]{natbib} %,sort
+\usepackage{amsthm,amsmath,amssymb} 
+\usepackage{afterpage,rotating,pdflscape} 
+\usepackage{cleveref} % for cref (load after hyperref and amsmath)
+%%%%%%%%%%%%%%%%%%%%%%%% GS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\allowdisplaybreaks
+% 
+%\usepackage[UKenglish]{babel} %%%
+\newcommand\eref[1]{{(\ref{#1})}}	
+\newcommand{\ignore}[1]{}
+\usepackage[margin=1.19in]{geometry}
+\usepackage{subfigure}
+\usepackage{marginnote}
+\newcommand{\ro}[1]{\textcolor{red}{#1}}
+\newcommand{\roo}[1]{{#1}} %%{\textcolor{red}{#1}}
+\newcommand{\fo}[1]{{#1}} %{\textcolor{blue}{#1}}
+\newcommand{\bo}[1]{{#1}} %{\textcolor{blue}{#1}}
+\newcommand{\qo}[1]{\textcolor{green}{#1}}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\newcommand{\bling}{\hfill{\LARGE $\diamond$}} 
+\newcommand{\noi}{\noindent}
+\newcommand{\textbfe}{\textit}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\gfrac}[2]{{#1}/{#2}}
+\newcommand{\gfracp}[2]{{#1}/{(#2)}}
+\newcommand{\gpfrac}[2]{{(#1)}/{#2}}
+\newcommand{\gpfracp}[2]{{(#1)}/{(#2)}}
+\newcommand{\pfrac}[2]{{#2}^{-#1}}
+\newcommand{\ffrac}{\displaystyle \frac}
+\newcommand{\tm}{$\times$} 
+\newcommand{\ds}{\displaystyle}
+\newcommand{\D}{\mathrm{d}}
+\newcommand{\fns}{\footnotesize}
+\newcommand{\scs}{\scriptsize}
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\ro{\mathrm{i}}}
+%%%\newcommand{\dd}{\mathrm{d}}
+\setcounter{secnumdepth}{3}
+\newcommand{\msgs}{\marginpar{*}}
+\newcommand{\msgnd}{\marginpar{\ro{\fns{\textsf{new display}}}}}
+\newcommand{\msgnds}{\marginpar{\ro{\fns{\textsf{new displays}}}}}
+\newcommand{\msg}[1]{\marginpar{\ro{\fns{\textsf{#1}}}}}
+\newcommand{\msgb}[1]{\marginpar{{{#1}}}}
+\newcommand{\msgd}{\marginpar{$\delta$}}
+\newcommand{\Bigoh}{O}
+\newcommand{\swnote}[1]{\textcolor{orange}{{ SW note: #1 }}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{color} 
+\usepackage{graphics,graphicx} 
+\graphicspath{ {./Figures/}}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKw{Break}{break}
+\SetAlgoNlRelativeSize{-5}
+\SetKw{Continue}{continue}
+\DontPrintSemicolon 
+%\usepackage{epstopdf}
+
+
+
+
+%Local macros: ####################################################
+\newcommand{\nb}{|B|}
+\newcommand{\T}{{\rm T}} % transpose
+\newcommand{\R}{\mathbb{R}} % Real numbers
+\newcommand{\Reals}{\mathbb{R}} % Real numbers
+\newcommand{\Nats}{{\mathbb{N}}} % Natural numbers
+\newcommand{\Ints}{{\mathbb{Z}}} % Integers
+\newcommand{\coA}{\mathbf{co}}
+\newcommand{\eps}{\varepsilon} 			% Nice looking epsilon
+\newcommand{\codes}[1]{{\rm \textsf{#1}}} % For codes
+\newcommand{\framework}[1]{{\rm #1}}% \textsf{#1}}} % For frameworks
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\Proj}[1]{\mathrm{proj}( #1 )}
+\newcommand{\Deltamax}{\Delta_{\rm max}}
+\newcommand{\Deltamin}{\Delta_{\rm min}}
+\newcommand{\kappaef}{\kappa_{{\rm ef}}}
+\newcommand{\kappaeg}{\kappa_{{\rm eg}}}
+\newcommand{\kappaeH}{\kappa_{{\rm eH}}}
+\newcommand{\kappaieg}{\kappa_{i, {\rm eg}}}
+\newcommand{\kappaief}{\kappa_{i, {\rm ef}}}
+\newcommand{\kappaibmh}{\kappa_{i, {\rm mh}}}
+\newcommand{\kappabmh}{\kappa_{{\rm mh}}}
+\newcommand{\kappaf}{\kappa_{\rm f}}
+\newcommand{\kappag}{\kappa_{\rm g}}
+\newcommand{\gammad}{\gamma_{\rm dec}}
+\newcommand{\kappad}{\kappa_{\rm d}}
+\newcommand{\gammai}{\gamma_{\rm inc}}
+\newcommand{\gammacrit}{\gamma_{\rm crit}}
+\newcommand{\defined}{=} %{\triangleq}
+\newcommand{\gS}{\gb^{\rm S}} 
+\newcommand{\gK}{\gb^{\rm K}} 
+\newcommand{\bigo}[1]{O ( #1 )}
+\newcommand{\dd}[3]{{#1}'(#2; #3)}
+\newcommand{\ld}[3]{{#1}'(#2; #3)}
+\newcommand{\lexSingDeriv}[3]{\tilde{\mathbf{J}}_\mathrm{L} #1(#2;#3)}
+\newcommand{\lexDeriv}[3]{\mathbf{J}_\mathrm{L} #1(#2;#3)}
+\newcommand{\nablaC}{\nabla_{\rm\! C}}
+\newcommand{\LnF}{L_{\nabla \! F}}
+\newcommand{\hmax}{\overline{h}}
+\newcommand{\hmin}{\underline{h}}
+\newcommand{\imax}{\overline{i}}
+\newcommand{\imin}{\underline{i}}
+\newcommand{\minimize}{\operatornamewithlimits{minimize}}
+\newcommand{\maximize}{\operatornamewithlimits{maximize}}
+\newcommand{\ceil}[1] {\lceil #1 \rceil}
+\renewcommand{\P}[1]{\operatorname{\mathbb{P}}[ #1]} % Probability
+\renewcommand{\dim}[1]{\operatorname{\textrm{dim}}( #1)} % dimension
+\newcommand{\qn}{(n+1)(n+2)/2} % quad poly degree
+\newcommand{\cm}{\mathrm{cm}}
+\newcommand{\eigmin}{\mathrm{eigmin}}
+\newcommand{\B}[2]{\mathcal{B}(#1 ; #2 )} % Ball
+\newcommand{\Lip}[1]{L_{\rm #1}} % Lipschitz constant
+%! This macro is for expectations within stand-alone equations
+\newcommand{\E}[2][]{\operatorname{\mathbb{E}}_{#1}\left[ #2\right]} % Exp value
+\newcommand{\Egg}[2][]{\operatorname{\mathbb{E}}_{#1}\Biggl[ #2\Biggr]} 
+% Exp value
+%! This next macros is for expectations in line
+\newcommand{\Ea}[2][]{\operatorname{\mathbb{E}}_{#1}[ #2]} % Exp value
+\newcommand{\df}[1]{\delta_{\rm f}(#1)} % forward difference
+\newcommand{\dc}[1]{\delta_{\rm c}(#1)} % central difference
+\newcommand{\trem}[1]{$^{\textrm #1}$} %Appendix note
+
+
+%% Refs 
+\newcommand{\tabref}[1]{\fo{Table~\ref{table:#1}}}
+\newcommand{\algref}[1]{\fo{Algorithm~\ref{alg:#1}}}
+\newcommand{\secref}[1]{Section~\ref{sec:#1}}
+\newcommand{\secrefs}[2]{Sections~\ref{sec:#1} and \ref{sec:#2}}
+\newcommand{\lineref}[1]{{line}~\ref{line:#1}}
+
+%% Bold symbols for all multivariate variables
+\newcommand{\zerob}{\mathbf{0}} % vector/matrix of zeros
+\newcommand{\oneb}{\mathbf{1}} % vector/matrix of ones
+\usepackage{bm} % For bold math symbols
+\newcommand{\phib}{\bm{\phi}}
+\newcommand{\Phib}{\bm{\Phi}}
+\newcommand{\alphab}{\bm{\alpha}}
+\newcommand{\betab}{\bm{\beta}}
+\newcommand{\kappab}{\bm{\kappa}}
+\newcommand{\thetab}{\bm{\theta}}
+\newcommand{\ab}{\bm{a}}
+\newcommand{\Ab}{\bm{A}}
+\newcommand{\bb}{\bm{b}}
+\newcommand{\Bb}{\bm{B}}
+\newcommand{\cb}{\bm{c}}
+\newcommand{\db}{\bm{d}}
+\newcommand{\Db}{\bm{D}}
+\newcommand{\eb}{\bm{e}}
+\newcommand{\fb}{\bm{f}}
+\newcommand{\Fb}{\bm{F}}
+\newcommand{\gb}{\bm{g}}
+\newcommand{\Gb}{\bm{G}}
+\newcommand{\Hb}{\bm{H}}
+\newcommand{\Ib}{\bm{I}}
+\newcommand{\lb}{\bm{l}}
+\newcommand{\Mb}{\bm{M}}
+\newcommand{\pb}{\bm{p}}
+\newcommand{\Pb}{\bm{P}}
+%! these next couple are new:
+\newcommand{\Rx}{R_{\xb}} %was R_0, effective radius of domain
+\newcommand{\Rlevel}{R_{\textrm{level}}} % radius of domain associated with level set
+\newcommand{\sba}{\bm{s}} 
+\newcommand{\Sb}{\bm{S}}
+\newcommand{\ub}{\bm{u}}
+\newcommand{\Ub}{\bm{U}}
+\newcommand{\Vb}{\bm{V}}
+\newcommand{\vb}{\bm{v}}
+\newcommand{\wb}{\bm{w}}
+\newcommand{\xb}{\bm{x}}
+\newcommand{\Xb}{\bm{X}}
+\newcommand{\yb}{\bm{y}}
+\newcommand{\Yb}{\bm{Y}}
+\newcommand{\zb}{\bm{z}}
+\newcommand{\Omegab}{\bm{\Omega}}
+\newcommand{\ellb}{\bm{\ell}}
+\newcommand{\xib}{\bm{\xi}}
+\newcommand{\Xib}{\bm{\Xi}}
+\newcommand{\lambdab}{\bm{\lambda}}
+\newcommand{\Iset}{I}
+\newcommand{\nub}{\bm{\nu}}
+
+%% Possibly infinite sets
+\newcommand{\cB}{\mathcal{B}} 
+\newcommand{\cX}{\mathcal{X}} 
+\newcommand{\cC}{\mathcal{C}} 
+\newcommand{\cLC}{\mathcal{LC}} 
+\newcommand{\cD}{\mathcal{D}} % Differentiable set
+\newcommand{\cG}{\mathcal{G}} 
+\newcommand{\cH}{\mathcal{H}} % History filtration
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\bm{\mathcal{L}}} % Level set
+\newcommand{\cN}{\mathcal{N}} % Gaussian 
+\newcommand{\cP}{\mathcal{P}} % polynomials
+
+% Helper commands (delete later)
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}\rlap{\raisebox{.45\ht0}{\textcolor{#1} {\rule{\wd0}{1pt}}}}#2} 
+\newcommand{\replace}[2]{{\color{red}\sout{#1}\color{black}{\color{red}#2\color{black}}}} %TeX source markup.
+\newcommand{\replacemath}[2]{{\hcancel[red]{#1}{}{\color{red}#2\color{black}}}} 
+%TeX source markup.
+\usepackage{lipsum}
+
+
+
+\newcommand{\Nonord}{\mathbf{N}}
+\newcommand{\epsb}{\bm{\epsilon}}
+
+% Define environments (Anthony)
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}
+%
