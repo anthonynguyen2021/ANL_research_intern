@@ -1,0 +1,176 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{lipsum} %This package just generates Lorem Ipsum filler text. 
+\usepackage{fullpage} % changes the margin
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb,amsthm}  % assumes amsmath package installed
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+\usepackage[numbered]{mcode}
+\usepackage{float}
+\usepackage{tikz}
+    \usetikzlibrary{shapes,arrows}
+    \usetikzlibrary{arrows,calc,positioning}
+
+    \tikzset{
+        block/.style = {draw, rectangle,
+            minimum height=1cm,
+            minimum width=1.5cm},
+        input/.style = {coordinate,node distance=1cm},
+        output/.style = {coordinate,node distance=4cm},
+        arrow/.style={draw, -latex,node distance=2cm},
+        pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
+        sum/.style = {draw, circle, node distance=1cm},
+    }
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{filemod}
+\setlength\parindent{0pt}
+    
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newenvironment{problem}[2][Problem]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solution:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%Header-Make sure you update this information!!!!
+\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\n}{\newline}
+
+\begin{center}
+    Meeting with Stefan: June 18, 2020
+\end{center}
+
+Consider $\mathbf{F}: \R^n \to \R^p$ (zero-th order oracle) and algebraically available $h: \R^p \to \R$. We want to minimize 
+\begin{align*}
+    f(\mathbf{x}) = h \circ \mathbf{F}(\mathbf{x})
+\end{align*}
+
+In the paper, we write 
+
+\begin{align}
+    f(\mathbf{x}) = h(\mathbf{F}(\mathbf{x});\mathbf{x}) = h \circ g(\mathbf{x})
+\end{align}
+
+where $g(\mathbf{x}) = \begin{bmatrix} \mathbf{F}(\mathbf{x}) \\ \mathbf{x} \end{bmatrix}$
+
+Therefore, we want to minimize $f$. To summarize:
+
+\begin{itemize}
+    \item $h$ algebraically available
+    \item $\mathbf{F}$ initially deterministic
+    \begin{itemize}
+        \item Randomness is from algorithm
+    \end{itemize}
+    \item $\mathbf{F}, h$ smooth as needed.
+    \item When possible, we would like to not require explicit knowledge of $\mathbf{F}$ (eg. Lipschitz constant)
+    \item Some cases, consider when function $h$ is convex in its primary arguments.
+\end{itemize}
+
+Let us write 
+
+\begin{align}
+    \mathbf{F}(\mathbf{x}) = \begin{bmatrix} F_1(\mathbf{x}) \\ \vdots \\ F_p(\mathbf{x}) \end{bmatrix}
+\end{align}
+
+We consider finite difference approximation to the directional derivative. 
+
+\begin{align}
+    \delta_{F_i}(F_i;\mathbf{x}_k; \mathbf{v};\Delta_k):= \frac{F_i(\mathbf{x}_k + \Delta_k \mathbf{v}) - F_i(\mathbf{x}_k)}{\Delta_k}, \quad i = 1, \dots,p 
+\end{align}
+
+where $\Delta_k > 0, \| \Delta_k \| \neq 0$. We assume a specific form of $f$, which is 
+
+\begin{align}
+    f(\mathbf{x}) = \sum_{i=1}^p F_i(\mathbf{x})^2
+\end{align}
+
+then we have 
+
+\begin{align}
+    D_vF(x_k) = \nabla_x F(\mathbf{x}_k)v \Rightarrow D_vF(\mathbf{x}_k) = 2\mathbf{v}^\top \nabla_x F(\mathbf{x})\mathbf{F}(\mathbf{x})
+\end{align}
+
+Questions: 
+
+\begin{itemize}
+    \item Swipe v through $n$ linearly independent directions? Too expensive. But swipe $1$ direction and hope that is good enough. Though we might hit a saddle point. 
+    \item How do we update $\mathbf{x}_k$? Look aat some papers Stefan suggested. \item Algebraically available, deterministic, explicit knowledge. 
+    \item Bandit methods? 
+    \item Zeroth order Oracle 
+\end{itemize}
+
+\begin{itemize}
+    \item Inner function, look at two $(2)$ points to estimate directional derivative
+    \item Need $n+1$ coordinates to evaluate if we want to estimate full Jacobian \item 1st order - local min/max and saddle 
+    \item Single derivative - 2 zeroth order calls. 
+    \item Gaussian smoothing, bandits method. 
+\end{itemize}
+
+\begin{itemize}
+    \item If $F_i(\mathbf{x}) \approx 0$ equation 
+    \begin{align}
+        \nabla_{x,x}^2f(x) = 2\sum_{i=1}^p(\nabla_x F_i(x)\nabla_x F_i(x)^\top + F_i(x)\nabla_x^2 F_i(x))
+    \end{align}
+    then it's enough to look at when directional derivative is close to zero.
+    \item batch sampling 
+    \item Full gradient estimate
+    \item 1st order stationary point.
+\end{itemize}
+
+Look at ref $1$ in journal.text  \newline
+Nesterov and Spokoing \newline 
+Alg. 6 \newline 
+
+Bandits method \newline 
+
+\underline{Homework:} Read these papers \newline 
+
+Convex stochastic optimization \n 
+
+Non-composite setting \n 
+
+(3) Walk these ideas in the paper in error bound \n 
+
+- Summarized them in a pdf and put in latex (important parts in repo) \n 
+
+Gaussian smoothing in nested optimization looks like \n 
+
+- Successful project leads to publication advisor not on.... This is good which says you can collaborate without your advisor and him not giving you all the ideas. \n 
+
+Carve something our - next one (project) - can collaborate \n 
+
+Obstacle - involve in Argonne (which isn't a large obstacle) \n
+
+\underline{Industry:} Publish without advisor. \n 
+
+Remiss. Time to delay graduation. Talk through what I have read and summarize it with reference in github when I talk to Matt or Raghu. \n 
+
+This should be a growing document in journal.text \n 
+
+Slack, email, talk and stay in touch with my group members. 
+
+
+ 
+
+\end{document}
+ 
